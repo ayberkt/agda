@@ -86,10 +86,11 @@ instance EmbPrj DeclarationWarning where
     EmptyInstance a                   -> icodeN 9 EmptyInstance a
     EmptyMacro a                      -> icodeN 10 EmptyMacro a
     EmptyPostulate a                  -> icodeN 11 EmptyPostulate a
-    InvalidTerminationCheckPragma a   -> icodeN 12 InvalidTerminationCheckPragma a
-    InvalidNoPositivityCheckPragma a  -> icodeN 13 InvalidNoPositivityCheckPragma a
-    InvalidCatchallPragma a           -> icodeN 14 InvalidCatchallPragma a
-    UnknownFixityInMixfixDecl a       -> icodeN 15 UnknownFixityInMixfixDecl a
+    EmptyFields a                     -> icodeN 12 EmptyFields a
+    InvalidTerminationCheckPragma a   -> icodeN 13 InvalidTerminationCheckPragma a
+    InvalidNoPositivityCheckPragma a  -> icodeN 14 InvalidNoPositivityCheckPragma a
+    InvalidCatchallPragma a           -> icodeN 15 InvalidCatchallPragma a
+    UnknownFixityInMixfixDecl a       -> icodeN 16 UnknownFixityInMixfixDecl a
 
   value = vcase $ \case
     [0, a] -> valueN UnknownNamesInFixityDecl a

@@ -109,6 +109,7 @@ data WarningName
   | EmptyInstance_
   | EmptyMacro_
   | EmptyPostulate_
+  | EmptyFields_
   | InvalidTerminationCheckPragma_
   | InvalidNoPositivityCheckPragma_
   | InvalidCatchallPragma_
@@ -202,6 +203,7 @@ warningNameDescription w = case w of
   EmptyInstance_                   -> "Empty `instance' blocks."
   EmptyMacro_                      -> "Empty `macro' blocks."
   EmptyPostulate_                  -> "Empty `postulate' blocks."
+  EmptyFields_                     -> "Empty list of `field's in record."
   InvalidTerminationCheckPragma_   -> "Termination checking pragmas before non-function or `mutual' blocks."
   InvalidNoPositivityCheckPragma_  -> "No positivity checking pragmas before non-`data', `record' or `mutual' blocks."
   InvalidCatchallPragma_           -> "`CATCHALL' pragmas before a non-function clause."

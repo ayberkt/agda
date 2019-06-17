@@ -1294,7 +1294,7 @@ Infix : 'infix'  Int SpaceBIds  { Infix (Fixity (getRange ($1,$3)) (Related $2) 
 
 -- Field declarations.
 Fields :: { [Declaration] }
-Fields : 'field' ArgTypeSignatures
+Fields : 'field' ArgTypeSignatures0
             { let
                 inst i = case getHiding i of
                            Instance _ -> InstanceDef
@@ -1764,6 +1764,10 @@ ArgTypeSignatures1 :: { [Arg TypeSignature] }
 ArgTypeSignatures1
     : ArgTypeSignatures1 semi ArgTypeSigs { reverse $3 ++ $1 }
     | ArgTypeSigs                         { reverse $1 }
+
+ArgTypeSignatures0 :: { [Arg TypeSignature] }
+  : vopen close       { [] }
+  | ArgTypeSignatures { $1 }
 
 -- -- A variant of TypeSignatures which uses ModalArgTypeSigs instead of
 -- -- TypeSigs.

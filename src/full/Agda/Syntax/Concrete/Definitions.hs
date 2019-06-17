@@ -214,6 +214,7 @@ data DeclarationWarning
   | EmptyInstance Range   -- ^ Empty @instance@  block
   | EmptyMacro Range      -- ^ Empty @macro@     block.
   | EmptyPostulate Range  -- ^ Empty @postulate@ block.
+  | EmptyFields Range     -- ^ Empty list of fields in record declaration.
   | InvalidTerminationCheckPragma Range
       -- ^ A {-# TERMINATING #-} and {-# NON_TERMINATING #-} pragma
       --   that does not apply to any function.
@@ -240,6 +241,7 @@ declarationWarningName dw = case dw of
   EmptyInstance{}                   -> EmptyInstance_
   EmptyMacro{}                      -> EmptyMacro_
   EmptyPostulate{}                  -> EmptyPostulate_
+  EmptyFields{}                     -> EmptyFields_
   InvalidTerminationCheckPragma{}   -> InvalidTerminationCheckPragma_
   InvalidNoPositivityCheckPragma{}  -> InvalidNoPositivityCheckPragma_
   InvalidCatchallPragma{}           -> InvalidCatchallPragma_
@@ -288,6 +290,7 @@ instance HasRange DeclarationWarning where
   getRange (EmptyInstance r)                    = r
   getRange (EmptyMacro r)                       = r
   getRange (EmptyPostulate r)                   = r
+  getRange (EmptyFields r)                      = r
   getRange (InvalidTerminationCheckPragma r)    = r
   getRange (InvalidNoPositivityCheckPragma r)   = r
   getRange (InvalidCatchallPragma r)            = r
@@ -390,6 +393,7 @@ instance Pretty DeclarationWarning where
   pretty (EmptyInstance  _) = fsep $ pwords "Empty instance block."
   pretty (EmptyMacro     _) = fsep $ pwords "Empty macro block."
   pretty (EmptyPostulate _) = fsep $ pwords "Empty postulate block."
+  pretty (EmptyFields _)    = fsep $ pwords "Empty list of fields in record."
   pretty (InvalidTerminationCheckPragma _) = fsep $
     pwords "Termination checking pragmas can only precede a function definition or a mutual block (that contains a function definition)."
   pretty (InvalidNoPositivityCheckPragma _) = fsep $
